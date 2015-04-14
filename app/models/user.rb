@@ -4,4 +4,12 @@ class User < ActiveRecord::Base
 
   has_many :user_team_relationships
   has_many :followed_teams, through: :user_team_relationships
+
+  def upcoming_matches
+    scheduled_matches = []
+    followed_teams.each do |team|
+      scheduled_matches += team.upcoming_matches
+    end
+    scheduled_matches
+  end
 end

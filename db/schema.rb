@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414160233) do
+ActiveRecord::Schema.define(version: 20150414173001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "match_results", force: :cascade do |t|
+    t.integer  "winner_id"
+    t.integer  "loser_id"
+    t.string   "score"
+    t.integer  "match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "matches", force: :cascade do |t|
-    t.datetime "match_time",                   null: false
+    t.date     "match_time",                   null: false
     t.integer  "team_one_id",                  null: false
     t.integer  "team_two_id",                  null: false
     t.integer  "number_of_rounds", default: 1, null: false
@@ -28,6 +37,13 @@ ActiveRecord::Schema.define(version: 20150414160233) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_match_relationships", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "match_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
