@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
     end
     scheduled_matches
   end
+
+  def follow_team(team_id)
+    followed_teams << Team.find(team_id)
+  end
 end
